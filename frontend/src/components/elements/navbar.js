@@ -1,5 +1,4 @@
-import React from "react"
-import { useState } from "react"
+import React, { useState } from "react"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import { MdMenu } from "react-icons/md"
@@ -61,7 +60,7 @@ const Navbar = ({ navbar, pageContext }) => {
           </div>
           <div className="flex items-center">
             {/* Locale Switch Mobile */}
-            {pageContext.localizations && (
+            {pageContext?.localizations && (
               <div className="md:hidden">
                 <LocaleSwitch pageContext={pageContext} />
               </div>
@@ -75,17 +74,17 @@ const Navbar = ({ navbar, pageContext }) => {
             </button>
 
             {/* CTA button on desktop */}
-            {navbar.button && (
+            {navbar?.button && (
               <div className="hidden md:block">
                 <ButtonLink
-                  button={navbar.button}
-                  appearance={getButtonAppearance(navbar.button.type, "light")}
+                  button={navbar?.button}
+                  appearance={getButtonAppearance(navbar?.button?.type, "light")}
                   compact
                 />
               </div>
             )}
             {/* Locale Switch Desktop */}
-            {pageContext.localizations && (
+            {pageContext?.localizations && (
               <div className="hidden md:block">
                 <LocaleSwitch pageContext={pageContext} />
               </div>

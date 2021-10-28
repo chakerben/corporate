@@ -9,5 +9,5 @@ export function getStrapiMedia(url) {
   }
 
   // Otherwise prepend the URL path with the Strapi URL
-  return `${process.env.GATSBY_STRAPI_URL || 'http://localhost:1337'}${url}`;
+  return `${process.env.GATSBY_STRAPI_URL || 'http://localhost:1338'}${url}`;
 }

@@ -8,10 +8,10 @@ module.exports = {
   },
   siteMetadata: {
     title: `Strapi+Gatsby Corporate Starter`,
-    siteUrl: `${process.env.GATSBY_STRAPI_URL || "http://localhost:1337"}`,
+    siteUrl: `${process.env.GATSBY_STRAPI_URL || "http://localhost:1338"}`,
     description: `A Strapi+Gatsby corporate starter`,
     author: `Strapi`,
-    languages: { defaultLocale: "en", locales: ["en", "fr"] },
+    languages: { defaultLocale: "en", locales: ["en"] },
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -42,7 +42,7 @@ module.exports = {
     {
       resolve: "gatsby-source-strapi",
       options: {
-        apiURL: process.env.GATSBY_STRAPI_URL || "http://localhost:1337",
+        apiURL: process.env.GATSBY_STRAPI_URL || "http://localhost:1338",
         collectionTypes: [
           {
             name: 'page',
@@ -53,6 +53,7 @@ module.exports = {
               }
             },
           },
+          "article", "category", "writer"
         ],
         singleTypes: [
           {
@@ -62,15 +63,7 @@ module.exports = {
                 _locale: 'en'
               }
             },
-          },
-          {
-            name: 'global',
-            api: {
-              qs: {
-                _locale: 'fr'
-              }
-            },
-          },
+          }
         ],
         queryLimit: 1000,
       },
