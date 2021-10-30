@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-article-strapi-article-slug-js",
+    "path": "/article/we-love-pizza/",
+    "result": {"data":{"strapiArticle":{"strapiId":6,"title":"We love Pizza","description":"Pizza is so delicious, specially four cheese pizza","content":"We love pizza at Strapi, what about you?","published_at":"2021-10-28T23:11:10.248Z","image":{"localFile":{"publicURL":"/static/fea0e8511a9243b58b0960e21926e340/undraw_design_page_88a37cd8c8.svg","childImageSharp":null}},"author":{"name":"David Doe","picture":{"localFile":{"childImageSharp":null}}}}},"pageContext":{"id":"Article_6","slug":"we-love-pizza","__params":{"slug":"we-love-pizza"}}},
+    "staticQueryHashes": ["1310098614"]}
