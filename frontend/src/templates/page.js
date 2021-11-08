@@ -1,107 +1,108 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import Layout from "@/components/layout"
 import Sections from "@/components/sections"
-import ArticlesComponent from "../components/articles";
-
+import ArticlesComponent from "../components/articles"
+import SneakersPage from "../pages/sneakersPage"
 const DynamicPage = ({ data, pageContext }) => {
   const { contentSections, metadata, localizations } = data.strapiPage
-  const [blogPage] = useState(data?.strapiPage.slug === 'news')
+  const [blogSlug] = useState(data?.strapiPage?.slug === "news")
+  const [sneakersSlug] = useState(data?.strapiPage?.slug === "sneakers")
   const blog = data.allStrapiArticle
-   console.log(data)
-
   return (
-      <Layout pageContext={{ ...pageContext, localizations }} seo={metadata}>
-        {blogPage ?
-        (<ArticlesComponent articles={blog?.edges} />) :
-        (
-          <Sections sections={contentSections} />
-        )
-      }
-      </Layout>
+    <Layout pageContext={{ ...pageContext, localizations }} seo={metadata}>
+      <Sections
+          sections={contentSections}
+          products={pageContext?.products}
+          articles={blog?.edges}
+        />
+      {blogSlug && <ArticlesComponent articles={blog?.edges} />}
+      {sneakersSlug && <SneakersPage sneakers={pageContext.listSneakers} />}
+    </Layout>
   )
 }
 
 export default DynamicPage
 
 export const query = graphql`
-fragment GlobalData on StrapiGlobal {   
-
-
-  favicon {
-    localFile {
-      publicURL
-    }
-  }
-  footer {
-    id
-    columns {
-      id
-      links {
-        id
-        newTab
-        text
-        url
-      }
-      title
-    }
-    id
-    logo {
-      alternativeText
-      localFile {
-        childImageSharp {
-          gatsbyImageData(
-            placeholder: BLURRED
-            formats: [AUTO, WEBP, AVIF]
-          )
-        }
-      }
-    }
-    smallText
-  }
-  id
-  metaTitleSuffix
-  metadata {
-    metaDescription
-    metaTitle
-    shareImage {
+  fragment GlobalData on StrapiGlobal {
+    favicon {
       localFile {
         publicURL
       }
     }
-  }
-  navbar {
-    button {
+    footer {
       id
-      newTab
-      text
-      type
-      url
+      columns {
+        id
+        links {
+          id
+          newTab
+          text
+          url
+        }
+        title
+      }
+      id
+      logo {
+        alternativeText
+        localFile {
+          childImageSharp {
+            gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+          }
+        }
+      }
+      smallText
     }
     id
-    links {
-      url
-      text
-      newTab
-      id
+    metaTitleSuffix
+    metadata {
+      metaDescription
+      metaTitle
+      shareImage {
+        localFile {
+          publicURL
+        }
+      }
     }
-    logo {
-      localFile {
-        childImageSharp {
-          gatsbyImageData(
-            placeholder: BLURRED
-            formats: [AUTO, WEBP, AVIF]
-          )
+    navbar {
+      button {
+        id
+        newTab
+        text
+        type
+        url
+      }
+      id
+      links {
+        url
+        text
+        newTab
+        id
+      }
+      logo {
+        localFile {
+          childImageSharp {
+            gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+          }
+        }
+      }
+    }
+    notificationBanner {
+      id
+      text
+      type
+    }
+    banner {
+      Title
+      Subtitle
+      Image {
+        localFile {
+          publicURL
         }
       }
     }
   }
-  notificationBanner {
-    id
-    text
-    type
-  }
-}
   query DynamicPageQuery($id: String!, $locale: String!) {
     strapiGlobal(locale: { eq: $locale }) {
       ...GlobalData
@@ -126,6 +127,7 @@ fragment GlobalData on StrapiGlobal {
           strapiId
           slug
           title
+          published_at
           category {
             name
           }

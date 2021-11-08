@@ -1,5 +1,14 @@
 const path = require("path")
 const { getLocalizedPaths } = require("./src/utils/localize")
+const {
+  getBrand,
+  getMostPopularSneakers,
+  getRecentlyViewed,
+  getSneakersByBrand,
+  getListSneakers,
+  getImage360,
+  getSize,
+} = require("./src/api/sneaker")
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -57,11 +66,93 @@ exports.createPages = async ({ graphql, actions }) => {
 
     return data.allStrapiPage.nodes
   })
+  //get list sneakers
+  const listSneakers = await getListSneakers()
+  //create all products page
+  const Product = path.resolve("./src/pages/productPage.js")
 
+  listSneakers?.map(prod => {
+    const slug = prod?.nick_name
+      ?.toLowerCase()
+      ?.replace(/ /g, "-")
+      ?.replace(/[^\w-]+/g, "")
+    prod.slug = slug
+    const context = {
+      slug: prod.slug,
+      prod: prod,
+    }
+    createPage({
+      path: `/sneakers/${prod.slug}`,
+      component: Product,
+      context: {
+        ...context,
+      },
+    })
+  })
+
+  //category on home page (recommended by us, brand , popular)
+  let products = {
+    brand: await getBrand(),
+    recomended: await getMostPopularSneakers(),
+    popular: await getRecentlyViewed(),
+  }
   const pages = await (await Promise.all(localePages)).flat()
 
   const PageTemplate = path.resolve("./src/templates/page.js")
+  const Brand = path.resolve("./src/pages/brandPage.js")
+  const Search = path.resolve("./src/pages/searchPage.js")
+  //add Slug for products
+  products?.recomended?.map(async prod => {
+    let name = prod?.nick_name ? prod?.nick_name : prod?._sneaker_ref?.nick_name
+    const slug = name
+      ?.toLowerCase()
+      ?.replace(/ /g, "-")
+      ?.replace(/[^\w-]+/g, "")
+    prod.slug = slug
+  })
+  products?.popular?.map(async prod => {
+    let name = prod?.nick_name ? prod?.nick_name : prod?._sneaker_ref?.nick_name
+    const slug = name
+      ?.toLowerCase()
+      ?.replace(/ /g, "-")
+      ?.replace(/[^\w-]+/g, "")
+    prod.slug = slug
+  })
 
+  products?.brand?.map(async categ => {
+    const slug = categ?.name
+      ?.toLowerCase()
+      ?.replace(/ /g, "-")
+      ?.replace(/[^\w-]+/g, "")
+    categ.slug = slug
+    categ.list = await getSneakersByBrand(categ.id)
+  })
+  //create brand page
+  products?.brand?.map(prod => {
+    const context = {
+      slug: prod.slug,
+      prod: prod,
+    }
+    createPage({
+      path: `/${prod.slug}`,
+      component: Brand,
+      context: {
+        ...context,
+      },
+    })
+  })
+  //Create search page
+  const context = {
+    slug: "search",
+    listSneakers: listSneakers,
+  }
+  createPage({
+    path: "/search",
+    component: Search,
+    context: {
+      ...context,
+    },
+  })
   // Create all non-root pages based on Strapi data
   pages.forEach(page => {
     const slug = page.slug ? page.slug : ""
@@ -78,6 +169,8 @@ exports.createPages = async ({ graphql, actions }) => {
       locale: page.locale,
       locales,
       defaultLocale,
+      products: products,
+      listSneakers: listSneakers,
     }
 
     const localizedPaths = getLocalizedPaths(context)

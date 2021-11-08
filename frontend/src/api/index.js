@@ -1,5 +1,2 @@
-import { initAxios } from '../plugins/axios'
-import * as SneakerApi from './sneaker'
-
-initAxios()
-export { SneakerApi }
+import * as SneakerApi from "./sneaker"
+export default SneakerApi

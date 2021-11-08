@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "develop:backend": "yarn --cwd backend develop",
-    "develop:frontend": "wait-on http://localhost:1338/admin && yarn --cwd frontend develop",
+    "develop:frontend": "wait-on http://localhost:1337/admin && yarn --cwd frontend develop",
     "develop": "cross-env FORCE_COLOR=1 npm-run-all -l -p develop:*"
   },
   "devDependencies": {
@@ -13,7 +13,8 @@
     "wait-on": "5.2.1"
   },
   "dependencies": {
+    "dayjs": "^1.10.7",
     "moment": "^2.29.1",
     "react-moment": "^1.1.1"
-  }
+  
 }

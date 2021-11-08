@@ -8,7 +8,7 @@ module.exports = {
   },
   siteMetadata: {
     title: `Strapi+Gatsby Corporate Starter`,
-    siteUrl: `${process.env.GATSBY_STRAPI_URL || "http://localhost:1338"}`,
+    siteUrl: `${process.env.GATSBY_STRAPI_URL || "http://localhost:1337"}`,
     description: `A Strapi+Gatsby corporate starter`,
     author: `Strapi`,
     languages: { defaultLocale: "en", locales: ["en"] },
@@ -42,7 +42,7 @@ module.exports = {
     {
       resolve: "gatsby-source-strapi",
       options: {
-        apiURL: process.env.GATSBY_STRAPI_URL || "http://localhost:1338",
+        apiURL: process.env.GATSBY_STRAPI_URL || "http://localhost:1337",
         collectionTypes: [
           {
             name: 'page',

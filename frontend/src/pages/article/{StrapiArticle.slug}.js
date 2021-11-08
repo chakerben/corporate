@@ -1,10 +1,10 @@
-import React from "react";
-import { graphql } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
-import Moment from "react-moment";
-import Layout from "../../components/layout";
+import React from "react"
+import { graphql } from "gatsby"
+import { GatsbyImage } from "gatsby-plugin-image"
+import Moment from "react-moment"
+import Layout from "../../components/layout"
 
-import Markdown from "react-markdown";
+import Markdown from "react-markdown"
 
 export const query = graphql`
   query ArticleQuery($slug: String!) {
@@ -34,16 +34,17 @@ export const query = graphql`
       }
     }
   }
-`;
+`
 
 const Article = ({ data }) => {
-  const article = data.strapiArticle;
+  console.log(data)
+  const article = data.strapiArticle
   const seo = {
     metaTitle: article.title,
     metaDescription: article.description,
     shareImage: article.image,
     article: true,
-  };
+  }
 
   return (
     <Layout seo={seo}>
@@ -81,7 +82,8 @@ const Article = ({ data }) => {
                 {article.author.picture && (
                   <GatsbyImage
                     image={
-                      article.author.picture.localFile.childImageSharp?.gatsbyImageData
+                      article.author.picture.localFile.childImageSharp
+                        ?.gatsbyImageData
                     }
                     alt={`Picture of ${article.author.name}`}
                     style={{ borderRadius: "50%" }}
@@ -100,8 +102,8 @@ const Article = ({ data }) => {
           </div>
         </div>
       </div>
-      </Layout>
-  );
-};
+    </Layout>
+  )
+}
 
-export default Article;
+export default Article

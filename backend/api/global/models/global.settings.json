@@ -69,6 +69,16 @@
         }
       }
     },
+    "banner": {
+      "type": "component",
+      "repeatable": false,
+      "component": "layout.banner",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
     "footer": {
       "type": "component",
       "repeatable": false,
