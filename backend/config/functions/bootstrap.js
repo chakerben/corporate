@@ -2,6 +2,9 @@ const fs = require("fs");
 const {
   pages,
   globals,
+  categories,
+  articles,
+  writers,
   leadFormSubmissions,
 } = require("../../data/data.js");
 
@@ -128,9 +131,8 @@ async function importPages(pages) {
           }
         };
         section.features.forEach((feature, featureIndex) => {
-          files[
-            `contentSections.${index}.features.${featureIndex}.media`
-          ] = getFeatureMedia(featureIndex);
+          files[`contentSections.${index}.features.${featureIndex}.media`] =
+            getFeatureMedia(featureIndex);
         });
       } else if (section.__component === "sections.feature-columns-group") {
         const getFeatureMedia = (featureIndex) => {
@@ -146,15 +148,13 @@ async function importPages(pages) {
           }
         };
         section.features.forEach((feature, featureIndex) => {
-          files[
-            `contentSections.${index}.features.${featureIndex}.icon`
-          ] = getFeatureMedia(featureIndex);
+          files[`contentSections.${index}.features.${featureIndex}.icon`] =
+            getFeatureMedia(featureIndex);
         });
       } else if (section.__component === "sections.testimonials-group") {
         section.logos.forEach((logo, logoIndex) => {
-          files[
-            `contentSections.${index}.logos.${logoIndex}.logo`
-          ] = getFileData("logo.png");
+          files[`contentSections.${index}.logos.${logoIndex}.logo`] =
+            getFileData("logo.png");
         });
         section.testimonials.forEach((testimonial, testimonialIndex) => {
           files[
@@ -183,9 +183,26 @@ async function importGlobal() {
   // Create entry
   globals.forEach(async (locale) => {
     await createEntry("global", locale, files);
-  })
+  });
 }
-
+async function importArticles() {
+  // Create entry
+  articles.forEach(async (locale) => {
+    await createEntry("article", locale);
+  });
+}
+async function importCategories() {
+  // Create entry
+  categories.forEach(async (locale) => {
+    await createEntry("category", locale);
+  });
+}
+async function importWriters() {
+  // Create entry
+  writers.forEach(async (locale) => {
+    await createEntry("writer", locale);
+  });
+}
 async function importLeadFormSubmissionData() {
   leadFormSubmissions.forEach(async (submission) => {
     await createEntry("lead-form-submissions", submission);
@@ -197,20 +214,24 @@ async function importSeedData() {
   await setPublicPermissions({
     global: ["find"],
     page: ["find", "findone"],
+    article: ["find", "findone"],
+    category: ["find", "findone"],
+    writer: ["find", "findone"],
     "lead-form-submissions": ["create"],
   });
-
 
   await strapi.query("locale", "i18n").create({
     name: "French (fr)",
     code: "fr",
   });
 
-  
   // Create all entries
   await importGlobal();
   await importPages(pages);
   await importLeadFormSubmissionData();
+  await importArticles();
+  await importCategories();
+  await importWriters();
 }
 
 module.exports = async () => {

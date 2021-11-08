@@ -45,25 +45,27 @@ module.exports = {
         apiURL: process.env.GATSBY_STRAPI_URL || "http://localhost:1337",
         collectionTypes: [
           {
-            name: 'page',
+            name: "page",
             api: {
               qs: {
-                _publicationState: 'preview',
-                _locale: 'all'
-              }
+                _publicationState: "preview",
+                _locale: "all",
+              },
             },
           },
-          "article", "category", "writer"
+          "article",
+          "category",
+          "writer",
         ],
         singleTypes: [
           {
-            name: 'global',
+            name: "global",
             api: {
               qs: {
-                _locale: 'en'
-              }
+                _locale: "en",
+              },
             },
-          }
+          },
         ],
         queryLimit: 1000,
       },
