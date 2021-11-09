@@ -23,16 +23,15 @@ const Footer = ({ footer }) => {
                 {footerColumn.title}
               </p>
               <ul className="mt-2">
-                {footerColumn.links.map(link => (
+                {footerColumn?.links?.map(link => (
                   <li
-                    key={link.id}
+                    key={link?.id}
                     className="text-gray-500 py-1 px-1 -mx-1 hover:text-green-700"
                   >
                     <CustomLink link={link}>{link.text}</CustomLink>
                   </li>
                 ))}
-          
-          </ul>
+              </ul>
             </div>
           ))}
         </nav>

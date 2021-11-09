@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import Moment from "react-moment"
 import Layout from "../../components/layout"
 
 import Markdown from "react-markdown"
@@ -95,7 +94,7 @@ const Article = ({ data }) => {
                   By {article.author.name}
                 </p>
                 <p className="uk-text-meta uk-margin-remove-top">
-                  <Moment format="MMM Do YYYY">{article.published_at}</Moment>
+                  {article.published_at}
                 </p>
               </div>
             </div>
