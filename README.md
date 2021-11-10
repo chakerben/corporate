@@ -5,11 +5,11 @@ kickXsquare project with strapi & gatsby
 ## Usage
 
 ```bash
-# Using Yarn
-yarn
-
-# Or using NPM
+# install dependencies using NPM
 npm install
+cd backend && npm install
+cd ..
+cd frontend && npm install 
 
 #start project
 yarn develop

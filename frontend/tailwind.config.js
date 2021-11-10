@@ -1,11 +1,12 @@
-const { colors } = require(`tailwindcss/defaultTheme`);
+const { colors } = require(`tailwindcss/defaultTheme`)
 
 module.exports = {
+  mode: "jit",
   purge: ["./src/components/**/*.js", "./src/pages/**/*.js"],
   theme: {
     extend: {
       colors: {
-        primary: colors.indigo,
+        primary: colors?.indigo,
       },
       container: {
         center: true,
@@ -22,5 +23,5 @@ module.exports = {
       xl: "1280px",
     },
   },
-  plugins: [require("@tailwindcss/typography")],
-};
+  // plugins: [require("@tailwindcss/typography")],
+}
