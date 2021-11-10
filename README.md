@@ -1,6 +1,4 @@
-# strapi-template-corporate
-
-kickXsquare project with strapi & gatsby
+#kickXsquare project with strapi & gatsby
 
 ## Usage
 
