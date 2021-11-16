@@ -66,7 +66,16 @@ const getListSneakers = async () => {
     return {}
   }
 }
-const getSize = async id => {
+const getListSize = async () => {
+  try {
+    const result = await axios.get(`${API}/size`)
+    return result.data
+  } catch (e) {
+    console.error(e)
+    return {}
+  }
+}
+const getSize = async (id ) => {
   try {
     const result = await axios.get(`${API}/size/${id}`)
     return result.data
@@ -85,4 +94,5 @@ module.exports = {
   getSneakersByBrand,
   getListSneakers,
   getImage360,
+  getListSize
 }

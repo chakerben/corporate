@@ -23,5 +23,5 @@ module.exports = {
       xl: "1280px",
     },
   },
-  // plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography")],
 }

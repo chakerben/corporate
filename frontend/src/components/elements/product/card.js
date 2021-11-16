@@ -52,7 +52,7 @@ const Card = ({ product }) => {
                 {" "}
                 {ask ? ask : "lowest ask"}
               </p>
-              <p className="chakra-text css-1kph905 price">€{price}</p>
+              <p className="chakra-text css-1kph905 price">${price}</p>
             </div>
             <p className="sold css-1eaqka8">{solde ? solde : "114 sold"}</p>
           </div>

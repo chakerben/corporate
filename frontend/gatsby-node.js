@@ -69,8 +69,11 @@ exports.createPages = async ({ graphql, actions }) => {
   //get list sneakers
   const listSneakers = await getListSneakers()
   //create all products page
-  const Product = path.resolve("./src/pages/productPage.js")
-
+  const Product = path.resolve("./src/templates/productPage.js")
+  const PageTemplate = path.resolve("./src/templates/page.js")
+  const BrandPage = path.resolve("./src/templates/brandPage.js")
+  const SearchPage = path.resolve("./src/templates/searchPage.js")
+  const SneakersPage = path.resolve("./src/templates/sneakersPage.js")
   listSneakers?.map(prod => {
     const slug = prod?.nick_name
       ?.toLowerCase()
@@ -96,11 +99,29 @@ exports.createPages = async ({ graphql, actions }) => {
     recomended: await getMostPopularSneakers(),
     popular: await getRecentlyViewed(),
   }
+  const contextRecomended = {
+    slug: "sneakers/most-popular",
+    sneakers: products?.recomended,
+  }
+  createPage({
+    path: `/${contextRecomended.slug}`,
+    component: SneakersPage,
+    context: {
+      ...contextRecomended,
+    },
+  })
+  const contextPopular = {
+    slug: "sneakers/recommended",
+    sneakers: products?.popular,
+  }
+  createPage({
+    path: `/${contextPopular.slug}`,
+    component: SneakersPage,
+    context: {
+      ...contextPopular,
+    },
+  })
   const pages = await (await Promise.all(localePages)).flat()
-
-  const PageTemplate = path.resolve("./src/templates/page.js")
-  const Brand = path.resolve("./src/pages/brandPage.js")
-  const Search = path.resolve("./src/pages/searchPage.js")
   //add Slug for products
   products?.recomended?.map(async prod => {
     let name = prod?.nick_name ? prod?.nick_name : prod?._sneaker_ref?.nick_name
@@ -135,7 +156,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
     createPage({
       path: `/${prod.slug}`,
-      component: Brand,
+      component: BrandPage,
       context: {
         ...context,
       },
@@ -148,7 +169,7 @@ exports.createPages = async ({ graphql, actions }) => {
   }
   createPage({
     path: "/search",
-    component: Search,
+    component: SearchPage,
     context: {
       ...context,
     },

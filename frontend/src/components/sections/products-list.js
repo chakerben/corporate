@@ -9,12 +9,18 @@ const RECOMMENDED_BY_US = "MostPopularSneakers"
 const MOST_POPULAR_SNEAKERS = "RecentlyViewed"
 
 const ProductsList = ({ data, products }) => {
+  const link =
+    data?.type === POPULAR_BRAND
+      ? "/sneakers"
+      : data?.type === MOST_POPULAR_SNEAKERS
+      ? "/sneakers/most-popular"
+      : "/sneakers/recommended"
   console.log(products)
   return (
     <section className="container align-middle text-center pt-12 pb-16">
       <Flex justifyContent="space-between">
         <h2 className="section-title mb-6">{data?.title}</h2>
-        <Link to={data?.link ? data?.link : "/"} className="uk-link-reset">
+        <Link to={link} className="uk-link-reset">
           {data?.labelLink}{" "}
           <svg
             viewBox="0 0 448 512"
@@ -30,25 +36,33 @@ const ProductsList = ({ data, products }) => {
         </Link>
       </Flex>
       {/* product list */}
-      <Box className="grid grid-cols-6 gap-4">
-        {data?.type === POPULAR_BRAND
-          ? products?.brand
-              ?.slice(0, data?.numberOfProducts)
-              .map((product, i) => (
-                <BrandCard brand={product} key={`brand-${i}`} />
-              ))
-          : data?.type === RECOMMENDED_BY_US
-          ? products?.recomended
-              ?.slice(0, data?.numberOfProducts)
-              .map((product, i) => (
-                <Card product={product} key={`recomended-${i}`} />
-              ))
-          : products?.popular
-              ?.slice(0, data?.numberOfProducts)
-              .map((product, i) => (
-                <Card product={product} key={`popular-${i}`} />
-              ))}
-      </Box>
+      {data?.type === POPULAR_BRAND && (
+        <Box className="grid grid-cols-5 gap-4">
+          {products?.brand
+            ?.slice(0, data?.numberOfProducts)
+            .map((product, i) => (
+              <BrandCard brand={product} key={`brand-${i}`} />
+            ))}
+        </Box>
+      )}
+      {data?.type === RECOMMENDED_BY_US && (
+        <Box className="grid grid-cols-6 gap-4">
+          {products?.recomended
+            ?.slice(0, data?.numberOfProducts)
+            .map((product, i) => (
+              <Card product={product} key={`recomended-${i}`} />
+            ))}
+        </Box>
+      )}
+      {data?.type === MOST_POPULAR_SNEAKERS && (
+        <Box className="grid grid-cols-6 gap-4">
+          {products?.popular
+            ?.slice(0, data?.numberOfProducts)
+            .map((product, i) => (
+              <Card product={product} key={`popular-${i}`} />
+            ))}
+        </Box>
+      )}
     </section>
   )
 }

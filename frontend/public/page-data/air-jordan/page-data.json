@@ -1,5 +1,5 @@
 {
-    "componentChunkName": "component---src-pages-brand-page-js",
+    "componentChunkName": "component---src-templates-brand-page-js",
     "path": "/air-jordan",
     "result": {"pageContext":{"slug":"air-jordan","prod":{"id":2,"created_at":1635017116191,"deleted_at":null,"name":"Air Jordan","logo":{"path":"/vault/DGPMTOjr/4vxavlF1/sbaZHw../jordan.jpg","name":"jordan.jpg","type":"image","size":4280,"mime":"image/jpeg","meta":{"width":245,"height":165},"url":"https://xwcj-gm1t-djcw.m2.xano.io/vault/DGPMTOjr/4vxavlF1/sbaZHw../jordan.jpg"},"slug":"air-jordan","list":[{"id":1,"created_at":1634584620000,"full_name":"Jordan 1 High Zoom Air CMFT Cauliflower (W)","sku":"CT0979-601","nick_name":"Cauliflower (W)","path":"Home/Sneakers/Air Jordan/1/Cmft/Jordan 1 High Zoom Air CMFT Pink Glaze (W)","colorway":"PINK GLAZE/CAULIFLOWER","retail_price":140,"release_date":null,"desciption":"N/A","rate":0,"brand_id":2,"category_id":0,"miniature":null,"_sneaker_item_of_sneaker_ref":[]}]}}},
     "staticQueryHashes": ["1017932383"]}

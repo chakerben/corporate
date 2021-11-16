@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import Layout from "@/components/layout"
 import Sections from "@/components/sections"
 import ArticlesComponent from "../components/articles"
-import SneakersPage from "../pages/sneakersPage"
+import SneakersPage from "../templates/sneakersPage"
 const DynamicPage = ({ data, pageContext }) => {
   const { contentSections, metadata, localizations } = data.strapiPage
   const [blogSlug] = useState(data?.strapiPage?.slug === "news")
@@ -12,10 +12,10 @@ const DynamicPage = ({ data, pageContext }) => {
   return (
     <Layout pageContext={{ ...pageContext, localizations }} seo={metadata}>
       <Sections
-          sections={contentSections}
-          products={pageContext?.products}
-          articles={blog?.edges}
-        />
+        sections={contentSections}
+        products={pageContext?.products}
+        articles={blog?.edges}
+      />
       {blogSlug && <ArticlesComponent articles={blog?.edges} />}
       {sneakersSlug && <SneakersPage sneakers={pageContext.listSneakers} />}
     </Layout>
