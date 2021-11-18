@@ -42,7 +42,8 @@ module.exports = {
     {
       resolve: "gatsby-source-strapi",
       options: {
-        apiURL: process.env.GATSBY_STRAPI_URL || "http://localhost:1337",
+        apiURL:
+          process.env.GATSBY_STRAPI_URL || "https://kickxsquare.herokuapp.com",
         collectionTypes: [
           {
             name: "page",
