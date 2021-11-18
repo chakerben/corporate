@@ -5,6 +5,7 @@ require("dotenv").config({
 module.exports = {
   flags: {
     DEV_SSR: false,
+    PARALLEL_QUERY_RUNNING: true
   },
   siteMetadata: {
     title: `Strapi+Gatsby Corporate Starter`,
